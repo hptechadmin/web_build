@@ -1,10 +1,13 @@
-FROM python:3.10-slim
+FROM node:18-alpine
 
 WORKDIR /app
 
-# Copy static files into container
+# Install serve package
+RUN npm install -g serve
+
+# Copy static files
 COPY . .
 
 EXPOSE 3001
 
-CMD ["python3", "-m", "http.server", "3001"]
+CMD ["serve", "-s", ".", "-l", "3001"]
